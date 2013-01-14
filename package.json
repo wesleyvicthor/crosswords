@@ -1,0 +1,10 @@
+{
+    "name": "Crosswords",
+    "version": "0.0.1",
+    "description": "A simple crosswords",
+    "author": "Wesley Victhor Mendes <w.v.mendes.s@gmail.com>",
+    "devDependencies": {
+        "jasmine-node": ">=1.0.28"
+    },
+    "engine": "node >= 0.8.16"
+}
