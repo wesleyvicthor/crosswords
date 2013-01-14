@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+var options = process.argv,
+    words = '';
+
+if (options.indexOf('-h') != -1) {
+    console.info("Crosswords usage: crosswords [-w ['words by space']] [-d] [debug mode]\n");
+    console.info('Options:')
+    console.info('\t-w followed by string of words separated by space');
+    console.info('\t-d debug mode');
+    process.exit(1);
+}
+
+var wordsOption = options.indexOf('-w');
+if (wordsOption != -1) {
+    words = options[wordsOption+1];
+}
+
+
+var Grid = require(__dirname + '/src/grid'),
+    GridIterator = require(__dirname + '/src/griditerator'),
+    Words = require(__dirname + '/src/words');
+
+try {
+    var words = new Words(words);
+    words.randDisposition();
+    
+    var grid = new Grid(words),
+        gridIterator = new GridIterator(grid);
+        grid.displayWords = (options.indexOf('-d') != -1) ? true : false;
+
+    gridIterator.mountGrid();
+    grid.show();
+} catch (e) {
+    console.info('Ops an error occurred: ');
+    console.info('\t' + e.message);
+    console.info('\ntype `crosswords -h` to show the help');
+}
+process.exit(1);
